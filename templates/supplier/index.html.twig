@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supplier index{% endblock %}
+
+{% block body %}
+    <h1>Supplier index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for supplier in suppliers %}
+            <tr>
+                <td>{{ supplier.id }}</td>
+                <td>{{ supplier.name }}</td>
+                <td>
+                    <ul>
+                        <li><a href="{{ path('app_supplier_show', {'id': supplier.id}) }}" style="text-decoration: none;"><button class="btn" id="show">Show</button></a></li>
+                        <li><a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" style="text-decoration: none;"><button class="btn" id="edit">Edit</button></a></li>
+                        <li>{{ include('supplier/_delete_form.html.twig') }}</li>
+                    </ul>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button style="margin-left: 1%;"><a href="{{ path('app_supplier_new') }}" style="text-decoration: none;">Create new</a></button>
+{% endblock %}

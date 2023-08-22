@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BorrowBook index{% endblock %}
+
+{% block body %}
+    <h1>BorrowBook index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Member</th>
+                <th>Book</th>
+                <th>BorrowDate</th>
+                <th>ReturnDate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for borrow_book in borrow_books %}
+            <tr>
+                <td>{{ borrow_book.id }}</td>
+                <td>{{ borrow_book.member }}</td>
+                <td>{{ borrow_book.book }}</td>
+                <td>{{ borrow_book.borrowDate ? borrow_book.borrowDate|date('Y-m-d') : '' }}</td>
+                <td>{{ borrow_book.returnDate ? borrow_book.returnDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <ul> 
+                        <li><a href="{{ path('app_borrow_book_show', {'id': borrow_book.id}) }}" style="text-decoration: none;"><button class="btn" id="show">Show</button></a></li>
+                        <li><a href="{{ path('app_borrow_book_edit', {'id': borrow_book.id}) }}" style="text-decoration: none;"><button class="btn" id="edit">Edit</button></a></li>
+                        <li>{{ include('borrow_book/_delete_form.html.twig') }}</li>
+                    </ul>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button style="margin-left: 1%;"><a href="{{ path('app_borrow_book_new') }}" style="text-decoration: none;">Create new</a></button>
+{% endblock %}

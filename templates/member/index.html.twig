@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Member index{% endblock %}
+
+{% block body %}
+    <h1>Member index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>PhoneNumber</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for member in members %}
+            <tr>
+                <td>{{ member.id }}</td>
+                <td>{{ member.name }}</td>
+                <td>{{ member.address }}</td>
+                <td>{{ member.phoneNumber }}</td>
+                <td>
+                    <ul>
+                        <li><a href="{{ path('app_member_show', {'id': member.id}) }}" style="text-decoration: none;"><button class="btn" id="show">Show</button></a></li>
+                        <li><a href="{{ path('app_member_edit', {'id': member.id}) }}" style="text-decoration: none;"><button class="btn" id="edit">Edit</button></a></li>
+                        <li>{{ include('member/_delete_form.html.twig') }}</li>
+                    </ul>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button style="margin-left: 1%;"><a href="{{ path('app_member_new') }}" style="text-decoration: none;">Create new</a></button>
+{% endblock %}

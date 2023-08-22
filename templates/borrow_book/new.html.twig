@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New BorrowBook{% endblock %}
+
+{% block body %}
+    <h1>Create new BorrowBook</h1>
+
+    {{ include('borrow_book/_form.html.twig') }}
+
+    <button><a href="{{ path('app_borrow_book_index') }}" style="text-decoration: none;">back to list</a></button>
+{% endblock %}
